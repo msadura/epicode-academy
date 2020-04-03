@@ -3,11 +3,12 @@ import {StyleSheet, View, Dimensions, Animated} from 'react-native';
 
 const styles = StyleSheet.create({
   ball: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: '#000000',
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#333333',
     position: 'absolute',
+    top: 0,
   },
   scene: {
     flex: 1,
@@ -17,10 +18,9 @@ const styles = StyleSheet.create({
 const {width, height} = Dimensions.get('window');
 
 export default function AnimatedObjects() {
-  // return null;
   return (
     <View style={[styles.scene]}>
-      {new Array(800).fill(true).map((_, i) => (
+      {new Array(100).fill(true).map((_, i) => (
         <AnimatedBall key={i} />
       ))}
     </View>
@@ -45,11 +45,22 @@ function AnimatedBall() {
     Animated.timing(animatedPosition, {
       toValue: height,
       duration: Math.random() * 3000 + 2000,
-      useNativeDriver: true,
     }).start(() => animate());
   };
 
   return (
-    <Animated.View style={[styles.ball, {top: animatedPosition, left: xPos}]} />
+    <Animated.View
+      style={[
+        styles.ball,
+        {
+          left: xPos,
+          transform: [
+            {
+              translateY: animatedPosition,
+            },
+          ],
+        },
+      ]}
+    />
   );
 }

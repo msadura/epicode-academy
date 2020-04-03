@@ -29,6 +29,8 @@ static void InitializeFlipper(UIApplication *application) {
 {
 #if DEBUG
   InitializeFlipper(application);
+  // For screencast purposes: keep screen awake
+  [[UIApplication sharedApplication]setIdleTimerDisabled:YES];
 #endif
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
