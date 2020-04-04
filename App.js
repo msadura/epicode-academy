@@ -27,8 +27,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import AnimatedObjectsJsDriver from './ep-01/AnimatedObjectsJsDriver';
-import AnimatedObjectsNativeDriver from './ep-01/AnimatedObjectsNativeDriver';
+import AnimatedObjectsJsDriver from './ep01/AnimatedObjectsJsDriver';
+import AnimatedObjectsNativeDriver from './ep01/AnimatedObjectsNativeDriver';
 
 const Container = styled.SafeAreaView`
   flex: 1;

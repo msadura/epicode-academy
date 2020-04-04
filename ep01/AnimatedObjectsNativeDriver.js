@@ -45,6 +45,7 @@ function AnimatedBall() {
     Animated.timing(animatedPosition, {
       toValue: height,
       duration: Math.random() * 3000 + 2000,
+      useNativeDriver: true,
     }).start(() => animate());
   };
 
