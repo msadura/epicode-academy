@@ -29,6 +29,7 @@ import {
 
 import AnimatedObjectsJsDriver from './ep01/AnimatedObjectsJsDriver';
 import AnimatedObjectsNativeDriver from './ep01/AnimatedObjectsNativeDriver';
+import BB8Screen from './ep02/BB8Screen';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -53,7 +54,8 @@ const App: () => React$Node = () => {
       <Container>
         {/* ep01: Optimize react native animations with native driver */}
         {/* <AnimatedObjectsJsDriver /> */}
-        <AnimatedObjectsNativeDriver />
+        {/* <AnimatedObjectsNativeDriver /> */}
+        <BB8Screen />
       </Container>
     </DevMenuTrigger>
   );
