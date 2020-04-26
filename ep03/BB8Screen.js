@@ -13,7 +13,7 @@ export default function BB8Screen() {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        <BB8 />
+        <BB8 bodyWidth={150} />
       </Container>
     </ThemeProvider>
   );

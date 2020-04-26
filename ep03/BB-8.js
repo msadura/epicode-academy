@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {View} from 'react-native';
-import Circle from './components/Circle';
 import HeadComponent from './components/Head';
 import BodyComponent from './components/Body';
 
