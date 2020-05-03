@@ -31,6 +31,7 @@ import AnimatedObjectsJsDriver from './ep01/AnimatedObjectsJsDriver';
 import AnimatedObjectsNativeDriver from './ep01/AnimatedObjectsNativeDriver';
 import BB8Screen02 from './ep02/BB8Screen';
 import BB8Screen03 from './ep03/BB8Screen';
+import BB8ScreenAnimated from './ep04/BB8ScreenAnimated';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -59,7 +60,9 @@ const App: () => React$Node = () => {
         {/* ep02: BB8 Droid with styled components part 1 */}
         {/* <BB8Screen02 /> */}
         {/* ep03: BB8 Droid with styled components - refactored with dynamic styles and theme */}
-        <BB8Screen03 />
+        {/* <BB8Screen03 /> */}
+        {/* ep04: BB8 Droid Animated */}
+        <BB8ScreenAnimated />
       </Container>
     </DevMenuTrigger>
   );
