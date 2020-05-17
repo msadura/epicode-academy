@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
+import {Animated} from 'react-native';
 import styled from 'styled-components/native';
 import Circle from './Circle';
 
@@ -41,7 +42,10 @@ const Stripe3 = styled(Stripe)`
   background-color: ${props => props.theme.GRAY2};
 `;
 
-const StripeDetails = styled(Stripe)`
+const StripeAnimated = Stripe.withComponent(Animated.View);
+
+const StripeDetails = styled(StripeAnimated)`
+  width: 135%
   height: 13%;
   bottom: 13%;
   justify-content: space-between;
@@ -54,6 +58,7 @@ const StripeDetailsLeft = styled.View`
 `;
 
 const StripeDetailsRight = styled(StripeDetailsLeft)`
+  flex: 1.35;
   justify-content: flex-end;
 `;
 
@@ -84,7 +89,7 @@ const EyesContainer = styled.View`
   width: 100%;
 `;
 
-const Eyes = styled.View`
+const Eyes = styled(Animated.View)`
   left: 50%;
 `;
 
@@ -118,7 +123,7 @@ const EyeSmallDetail = styled(Circle)`
   background-color: ${props => props.theme.DARK};
 `;
 
-const AntennasContainer = styled.View`
+const AntennasContainer = styled(Animated.View)`
   position: absolute;
   left: 20%;
   bottom: 70%;
@@ -141,12 +146,33 @@ const Antenna2 = styled.View`
   border-top-color: ${props => props.theme.DARK};
 `;
 
-export default function HeadComponent({bodyWidth}) {
+export default function HeadComponent({bodyWidth, lookRight = true}) {
   const headWidth = bodyWidth * 0.66;
+  const animatedValue = useRef(new Animated.Value(0)).current;
+
+  const lookAnimation = isRight => {
+    Animated.timing(animatedValue, {
+      toValue: isRight ? 0 : 1,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  useEffect(() => {
+    lookAnimation(lookRight);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lookRight]);
+
+  const negativePosition = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, -headWidth * 0.35],
+  });
+
+  const positivePosition = Animated.multiply(negativePosition, -1);
 
   return (
     <HeadContainer>
-      <AntennasContainer>
+      <AntennasContainer style={{transform: [{translateX: positivePosition}]}}>
         <Antenna1 size={bodyWidth} />
         <Antenna2 size={bodyWidth} />
       </AntennasContainer>
@@ -155,7 +181,7 @@ export default function HeadComponent({bodyWidth}) {
         <Stripe2 />
         <Stripe3 />
 
-        <StripeDetails>
+        <StripeDetails style={{transform: [{translateX: negativePosition}]}}>
           <StripeDetailsLeft>
             <StripeDetail1 />
             <StripeDetail1 />
@@ -164,11 +190,13 @@ export default function HeadComponent({bodyWidth}) {
           </StripeDetailsLeft>
           <StripeDetailsRight>
             <StripeDetail3 />
+            <StripeDetail2 />
+            <StripeDetail1 />
           </StripeDetailsRight>
         </StripeDetails>
 
         <EyesContainer>
-          <Eyes>
+          <Eyes style={{transform: [{translateX: negativePosition}]}}>
             <EyeBig size={bodyWidth * 0.17}>
               <EyeBigDetail size={bodyWidth * 0.026} />
             </EyeBig>
