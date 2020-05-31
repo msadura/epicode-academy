@@ -4,6 +4,11 @@ import reducer from './reducer';
 
 let middlewaresToApply = [];
 
+if (__DEV__) {
+  const createFlipperDebugger = require('redux-flipper').default;
+  middlewaresToApply.push(createFlipperDebugger());
+}
+
 const middleware = applyMiddleware(...middlewaresToApply);
 
 export default createStore(reducer, middleware);
