@@ -37,13 +37,13 @@ function ReduxAppContainer({
       </ButtonsRow>
       <Text>Background color: {backgroundColor}</Text>
       <Text>Change background:</Text>
-      <Button title="gray" onPress={() => changeBackgroundColor('gray')} />
+      <Button title="gray" onPress={() => changeBackgroundColor('silver')} />
       <Button
-        title="dark blue"
-        onPress={() => changeBackgroundColor('darkblue')}
+        title="green"
+        onPress={() => changeBackgroundColor('yellowgreen')}
       />
       <Button title="pink" onPress={() => changeBackgroundColor('pink')} />
-      <Button title="red" onPress={() => changeBackgroundColor('red')} />
+      <Button title="maroon" onPress={() => changeBackgroundColor('maroon')} />
     </Container>
   );
 }

@@ -10,6 +10,6 @@ export function decreaseCounter() {
   return {type: DECREASE_COUNTER};
 }
 
-export function changeBackgroundColor(color = 'gray') {
+export function changeBackgroundColor(color = 'silver') {
   return {type: CHANGE_BACKGROUND_COLOR, payload: {color}};
 }

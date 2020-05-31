@@ -16,7 +16,7 @@ function counter(state = 0, action) {
   }
 }
 
-function backgroundColor(state = 'gray', action) {
+function backgroundColor(state = 'silver', action) {
   switch (action.type) {
     case CHANGE_BACKGROUND_COLOR:
       return action.payload.color;
