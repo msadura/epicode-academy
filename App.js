@@ -33,6 +33,7 @@ import BB8Screen02 from './ep02/BB8Screen';
 import BB8Screen03 from './ep03/BB8Screen';
 import BB8ScreenAnimated from './ep04/BB8ScreenAnimated';
 import ReduxAppScreen from './ep05/ReduxAppScreen';
+import CircularProgressScreen from './ep06/CircularProgressScreen';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -65,7 +66,9 @@ const App: () => React$Node = () => {
         {/* ep04: BB8 Droid Animated */}
         {/* <BB8ScreenAnimated /> */}
         {/* ep05: Redux App Screen with debugger */}
-        <ReduxAppScreen />
+        {/* <ReduxAppScreen /> */}
+        {/* ep06: Circular progress component */}
+        <CircularProgressScreen />
       </Container>
     </DevMenuTrigger>
   );
