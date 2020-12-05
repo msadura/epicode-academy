@@ -4,13 +4,12 @@ import {Animated} from 'react-native';
 
 const EMPTY_COLOR = '#a0a0a1';
 const PROGRESS_COLOR = '#0085FF';
-const SIZE = 200;
 
 const CircleBase = styled(Animated.View)`
-  width: ${SIZE}px;
-  height: ${SIZE}px;
-  border-radius: ${SIZE / 2}px;
-  border-width: 15px;
+  width: ${props => props.size}px;
+  height: ${props => props.size}px;
+  border-radius: ${props => props.size / 2}px;
+  border-width: ${props => props.size / 10}px;
 `;
 
 const EmptyCircle = styled(CircleBase)`
@@ -21,10 +20,6 @@ const EmptyCircle = styled(CircleBase)`
 `;
 
 const Indicator = styled(CircleBase)`
-  width: ${SIZE}px;
-  height: ${SIZE}px;
-  border-radius: ${SIZE / 2}px;
-  border-width: 15px;
   position: absolute;
   border-left-color: ${PROGRESS_COLOR};
   border-top-color: ${PROGRESS_COLOR};
@@ -40,7 +35,7 @@ const CoverIndicator = styled(CircleBase)`
   border-bottom-color: transparent;
 `;
 
-export default function CircularProgress({progress = 0}: Props) {
+export default function CircularProgress({progress = 0, size = 50}: Props) {
   const animatedProgress = useRef(new Animated.Value(0)).current;
 
   const animateProgress = useRef(toValue => {
@@ -73,10 +68,14 @@ export default function CircularProgress({progress = 0}: Props) {
   });
 
   return (
-    <EmptyCircle>
-      <Indicator style={{transform: [{rotate: firstIndicatorRotate}]}} />
-      <CoverIndicator />
+    <EmptyCircle size={size}>
       <Indicator
+        style={{transform: [{rotate: firstIndicatorRotate}]}}
+        size={size}
+      />
+      <CoverIndicator size={size} />
+      <Indicator
+        size={size}
         style={{
           transform: [{rotate: secondIndicatorRotate}],
           opacity: secondIndictorVisibility,

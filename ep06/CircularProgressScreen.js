@@ -12,7 +12,7 @@ const Container = styled.View`
 export default function CircularProgressScreen() {
   return (
     <Container>
-      <CircularProgress progress={10} />
+      <CircularProgress progress={10} size={200} />
     </Container>
   );
 }
