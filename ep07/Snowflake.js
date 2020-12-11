@@ -118,16 +118,16 @@ function getConfig(scene) {
   const size = randomInt(10, 18);
   const opacity = randomInt(4, 10) / 10;
   const type = snowlakeTypes[randomInt(0, 2)];
-
   const xPosition = randomInt(0, width);
+
   const fallDuration = randomInt(10000, 30000);
-  const fallDelay = randomInt(500, 8000);
+  const fallDelay = randomInt(500, 10000);
 
   const rotationDuration = randomInt(5000, 10000);
   const rotationDirection = randomInt(0, 1);
 
   const sideMovementDuration = randomInt(3000, 8000);
-  const sideMovementAmplitude = randomInt(0, 20);
+  const sideMovementAmplitude = randomInt(0, 30);
 
   return {
     size,
