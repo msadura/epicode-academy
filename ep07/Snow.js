@@ -4,9 +4,10 @@ import Snowflake from './Snowflake';
 
 const Container = styled.View`
   flex: 1;
+  width: 100%;
 `;
 
-export default function Snow({fallingSnowflakesCount = 50}) {
+export default function Snow({fallingSnowflakesCount = 150}) {
   const [dimensions, setDimensions] = useState({width: 0, height: 0});
 
   const onLayout = ({
@@ -15,15 +16,15 @@ export default function Snow({fallingSnowflakesCount = 50}) {
     },
   }) => setDimensions({width, height});
 
-  if (!dimensions.width || !dimensions.height) {
-    return null;
-  }
+  const showContent = dimensions.width && dimensions.height;
 
   return (
     <Container onLayout={onLayout}>
-      {new Array(fallingSnowflakesCount).fill(true).map((_, i) => (
-        <Snowflake key={i} scene={dimensions} />
-      ))}
+      {showContent
+        ? new Array(fallingSnowflakesCount)
+            .fill(true)
+            .map((_, i) => <Snowflake key={i} scene={dimensions} />)
+        : null}
     </Container>
   );
 }

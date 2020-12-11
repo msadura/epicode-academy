@@ -7,6 +7,7 @@ const Container = styled.View`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background-color: #0085ff;
 `;
 
 export default function SnowScreen() {
