@@ -1,19 +1,29 @@
 import React from 'react';
-import styled from 'styled-components/native';
-import Snow from './Snow';
+import {Image, Dimensions, StyleSheet, View} from 'react-native';
 
-const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-color: #0085ff;
-`;
+import Snow from './Snow';
+import BgImg from './winterBg.jpg';
+
+const {width, height} = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+  container: {
+    width,
+    height,
+    overflow: 'hidden',
+    // backgroundColor: '#0085ff',
+  },
+  bg: {
+    width,
+    height,
+  },
+});
 
 export default function SnowScreen() {
   return (
-    <Container>
+    <View style={styles.container}>
+      <Image source={BgImg} style={styles.bg} />
       <Snow />
-    </Container>
+    </View>
   );
 }
