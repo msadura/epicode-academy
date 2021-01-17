@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     width,
     height,
     overflow: 'hidden',
-    // backgroundColor: '#0085ff',
   },
   bg: {
     width,

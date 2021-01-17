@@ -9,17 +9,17 @@ const styles = StyleSheet.create({
 });
 
 const START_Y_POSITION = -50;
+const SNOWFLAKE_TYPES = ['❄', '❅', '❆'];
 
 export default function Snowflake({scene}) {
-  const [config, setConfig] = useState(() => getConfig(scene));
+  const [config, setConfig] = useState(() => getConfig());
   const animatedY = useRef(new Animated.Value(START_Y_POSITION)).current;
   const animatedRotation = useRef(new Animated.Value(0)).current;
-  const animatedSideMovement = useRef(new Animated.Value(0)).current;
+  const animatedSwing = useRef(new Animated.Value(0)).current;
 
-  const runAnimation = snowflakeConfig => {
+  const runAnimation = () => {
     animatedY.setValue(START_Y_POSITION);
     animatedRotation.setValue(0);
-    animatedSideMovement.setValue(0);
 
     Animated.loop(
       Animated.timing(animatedRotation, {
@@ -32,15 +32,15 @@ export default function Snowflake({scene}) {
 
     Animated.loop(
       Animated.sequence([
-        Animated.timing(animatedSideMovement, {
+        Animated.timing(animatedSwing, {
           toValue: -1,
-          duration: config.sideMovementDuration,
+          duration: config.swingDuration,
           easing: Easing.linear,
           useNativeDriver: true,
         }),
-        Animated.timing(animatedSideMovement, {
+        Animated.timing(animatedSwing, {
           toValue: 1,
-          duration: config.sideMovementDuration,
+          duration: config.swingDuration,
           easing: Easing.linear,
           useNativeDriver: true,
         }),
@@ -56,7 +56,7 @@ export default function Snowflake({scene}) {
         useNativeDriver: true,
       }),
     ]).start(() => {
-      const newConfig = getConfig(scene);
+      const newConfig = getConfig();
       setConfig(newConfig);
     });
   };
@@ -73,12 +73,11 @@ export default function Snowflake({scene}) {
     outputRange: config.rotationDirection
       ? ['0deg', '360deg']
       : ['360deg', '0deg'],
-    extrapolate: 'clamp',
   });
 
-  const translateX = animatedSideMovement.interpolate({
+  const translateX = animatedSwing.interpolate({
     inputRange: [-1, 1],
-    outputRange: [-config.sideMovementAmplitude, config.sideMovementAmplitude],
+    outputRange: [-config.swingAmplitude, config.swingAmplitude],
   });
 
   return (
@@ -86,12 +85,10 @@ export default function Snowflake({scene}) {
       style={[
         styles.snowflake,
         {
-          transform: [{translateY: animatedY}, {rotate}, {translateX}],
-        },
-        {
           left: config.xPosition,
           fontSize: config.size,
           opacity: config.opacity,
+          transform: [{translateY: animatedY}, {rotate}, {translateX}],
         },
       ]}>
       {config.type}
@@ -99,37 +96,32 @@ export default function Snowflake({scene}) {
   );
 }
 
-const snowlakeTypes = ['❄', '❅', '❆'];
-
 function getConfig(scene) {
-  const {width} = scene;
-
   const size = randomInt(10, 18);
   const opacity = randomInt(4, 10) / 10;
-  const type = snowlakeTypes[randomInt(0, 2)];
-  const xPosition = randomInt(0, width);
+  const type = SNOWFLAKE_TYPES[randomInt(0, 2)];
+  const xPosition = `${randomInt(0, 100)}%`;
 
-  //fall animation
   const fallDuration = randomInt(10000, 30000);
   const fallDelay = randomInt(500, 10000);
-  // rotate animation
+
   const rotationDuration = randomInt(2000, 10000);
   const rotationDirection = randomInt(0, 1);
-  // side shake animation
-  const sideMovementDuration = randomInt(3000, 8000);
-  const sideMovementAmplitude = randomInt(0, 30);
+
+  const swingDuration = randomInt(3000, 8000);
+  const swingAmplitude = randomInt(0, 30);
 
   return {
     size,
     opacity,
     type,
     xPosition,
-    fallDuration,
     fallDelay,
+    fallDuration,
     rotationDuration,
     rotationDirection,
-    sideMovementDuration,
-    sideMovementAmplitude,
+    swingDuration,
+    swingAmplitude,
   };
 }
 
