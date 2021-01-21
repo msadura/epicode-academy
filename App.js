@@ -34,6 +34,7 @@ import BB8Screen03 from './ep03/BB8Screen';
 import BB8ScreenAnimated from './ep04/BB8ScreenAnimated';
 import ReduxAppScreen from './ep05/ReduxAppScreen';
 import CircularProgressScreen from './ep06/CircularProgressScreen';
+import SnowScreen from './ep07/SnowScreen';
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -68,7 +69,9 @@ const App: () => React$Node = () => {
         {/* ep05: Redux App Screen with debugger */}
         {/* <ReduxAppScreen /> */}
         {/* ep06: Circular progress component */}
-        <CircularProgressScreen />
+        {/* <CircularProgressScreen /> */}
+        {/* ep07: Animated snow */}
+        <SnowScreen />
       </Container>
     </DevMenuTrigger>
   );
