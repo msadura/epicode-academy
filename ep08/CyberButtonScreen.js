@@ -1,5 +1,5 @@
-import React, {useRef} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
 import CyberButton from './CyberButton';
 
 const styles = StyleSheet.create({
@@ -15,25 +15,10 @@ const styles = StyleSheet.create({
 });
 
 export default function CyberButtonScreen() {
-  const btnRef = useRef();
-
   return (
     <View style={styles.container}>
       <View style={styles.btnContainer}>
-        <Text>auto animate:</Text>
-        <CyberButton label="cyberpunk_" />
-      </View>
-      <View style={styles.btnContainer}>
-        <Text>Tap to animate:</Text>
-        <TouchableOpacity onPress={() => btnRef.current.animate()}>
-          <CyberButton
-            ref={btnRef}
-            mainColor="blue"
-            shadowColor="red"
-            disableAutoAnimation
-            label="cyberpunk_"
-          />
-        </TouchableOpacity>
+        <CyberButton label="CYBERPUNK" />
       </View>
     </View>
   );
